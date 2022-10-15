@@ -1,0 +1,16 @@
+# Unit file for systemd
+# INSTALLATION:
+#   - Copy to /etc/systemd/system
+#   - Enable with "systemctl enable radiodelay.service"
+#   - Start with "systemctl start radiodelay.service"
+[Unit]
+Description=Radio delayer
+Requires=sys-devices-platform-soc-20980000.usb-usb1-1\x2d1-1\x2d1:1.0-sound-card1-controlC1.device
+
+[Service]
+Type=forking
+ExecStart=/opt/radio-delay/ctrl_radio_delay.sh start
+ExecStop=/opt/radio-delay/ctrl_radio_delay.sh stop
+
+[Install]
+WantedBy=multi-user.target
